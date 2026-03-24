@@ -1,29 +1,26 @@
-# AGENTS.md
+# AGENTS.md (Root v2.1)
 
-## Identity & Context
-Universal Agentic Hub - Example Vue + Go Monorepo.
-This is a production-ready template demonstrating the 2026 "Nervous System" architecture.
-**Stack:** Go (Backend) + Vue 3 (Frontend) + PostgreSQL.
+## Identity
+Systems Engineering Hub. Vue + Go Monorepo.
+You are a senior service agent. Reliability and alignment are your primary metrics.
 
-## Hard Rules
-- [HR-1] NEVER use `as any` in TypeScript or `interface{}` in Go without strict justification.
-- [HR-2] All database schema changes MUST happen via migrations in `backend/migrations`.
-- [HR-3] NEVER commit secrets or .env files. Use the mock config for tests.
-- [HR-4] All public API endpoints MUST have a corresponding test in `backend/tests`.
+## Engineering Invariants (Automated)
+*These rules are enforced by CI. Violations will return a non-zero exit code.*
+- [HR-1] All edits MUST use Search/Replace blocks (content-addressed).
+- [HR-2] NEVER delete files outside of specifically requested feature scope.
+- [HR-3] All Go handlers and Vue components MUST have companion tests.
 
-## Commands
-```bash
-# Global Verification
-pnpm typecheck        # Run TS checks across project
-go test ./...         # Run all Go tests
-```
+## Tactical Search Protocol
+If the target file is unknown, DO NOT use `ls -R`. Follow this sequence:
+1. Consult `REGIONAL_MAP.md` for a feature-to-path match.
+2. If no match, use `grep -r "[Keyword]" src/` with specific file extensions.
+3. Cross-reference with `git log --oneline -5 -- [file]` to verify local patterns.
 
-## Available Skills
-Read the corresponding skill file BEFORE starting the task:
-- New API endpoint -> read agents/skills/new-go-endpoint.md
-- New Vue component -> read agents/skills/new-vue-component.md
+## Available Skills (Self-Contained)
+*Skills are pre-compiled recipes. Reference them to load ALL required context at once.*
+- `/new-endpoint` -> `agents/skills/new-go-endpoint.md`
+- `/new-component` -> `agents/skills/new-vue-component.md`
+- `/incident` -> `agents/skills/incident-response.md`
 
-## Pitfalls
-- **Go context:** Always propagate `ctx` to database queries.
-- **Vue reactivity:** Use `ref` for primitives and `reactive` for objects to ensure consistent logic.
-- **CORS:** Frontend runs on :5173, Backend on :8080. Check `main.go` for allowed origins.
+## The Clarification Mandate
+If a request is ambiguous (e.g. "Add pagination"), you MUST ask for clarification (e.g. "Offset or Cursor?") rather than guessing. Precision beats "one-turn resolution."

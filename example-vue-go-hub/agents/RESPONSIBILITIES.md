@@ -1,42 +1,37 @@
-# Agentic KPIs & Responsibilities (Enterprise Standard)
+# Agentic KPIs & Responsibilities (Hardened v2.1)
 
-This document defines the deterministic success metrics for agents operating within this repository. Use these to graduate from "Experimental Agent" to "Production Service Agent."
+This version replaces "vibe-metrics" with deterministic engineering accountability.
 
 ---
 
-## 1. Agent KPIs (Metrics of Success)
+## 1. Accountability Metrics
 
-| Metric | Target | Measurement Strategy |
+| Metric | Target | Verification Method |
 | :--- | :--- | :--- |
-| **One-Turn Resolution** | >90% | Ratio of tasks solved without human "clarification" turns. |
-| **Surgical Accuracy** | 100% | Zero accidental code deletions (verified by diff inspection). |
-| **Verification Gate** | 100% | All patches MUST pass `LSP check` + `Shadow Test` before PR creation. |
-| **Context Density** | <2k Tokens | Effective use of **Scoped Rules** to keep instructions lean. |
+| **Correctness Rate** | >95% | Passing CI + successful manual PR review. |
+| **Clarification Rate** | 15-25% | Ratio of turns where the agent asks for missing specs. |
+| **Surgical Reliability** | 100% | Verified by `git diff --stat` against whitelisted paths. |
+| **Cleanup Rate** | 100% | Zero `__shadow_*` files remaining in the PR branch. |
 
 ---
 
-## 2. Hard Responsibilities
+## 2. The Hardened Shadow Test Protocol
 
-An agent in this repo is a **Systems Engineer**, not a chatbot. It owns the following:
+To prevent workspace pollution, all autonomous tests must follow this 4-layer safety protocol:
 
-### [A] The "Zero-Search" Mandate
-*   **Responsibility:** Agent must consult `AGENTS.md` and `Regional Map` at the start of every session.
-*   **Penalty:** If the agent greps for a file mentioned in the Root Map, it has failed its Orientation phase.
+### Layer 1: Unique Identification
+All shadow files must use the format: `__shadow_{timestamp}_{random}_test.go` or `.spec.ts`.
 
-### [B] Environment Integrity
-*   **Responsibility:** Agent must run `pnpm typecheck` and `go test` after EVERY code patch.
-*   **Constraint:** You are prohibited from reporting "Task Complete" while the Terminal reflects a non-zero exit code.
+### Layer 2: Build Tagging (Isolation)
+Every Go shadow test MUST include the following line at the absolute top:
+`//go:build shadow_test`
+*This prevents shadow tests from compiling during standard production builds.*
 
-### [C] Durable Memory Update
-*   **Responsibility:** After solving a non-trivial bug, the agent MUST update `backend/AGENTS.md` or `frontend/AGENTS.md` with a "Pitfall" entry.
+### Layer 3: Bounded Retries
+If a shadow test fails, the agent has **exactly 2 attempts** to fix the internal logic. If it still fails, the agent MUST:
+1. Revert the code change.
+2. Delete the shadow test.
+3. Report the failure to the user.
 
----
-
-## 3. The "Shadow Test" Protocol
-
-Before any `git commit`, the agent must execute a **Shadow Test cycle**:
-
-1.  **Isolation:** Create a micro-test in `tests/shadow/[task_id]_test.go`.
-2.  **Execution:** Run the specific test against the new patch.
-3.  **Cleanup:** Delete the shadow test file after a successful run (leave no trace).
-4.  **Reporting:** Log only the result: `SHADOW_TEST: PASSED`.
+### Layer 4: Automatic Decommissioning
+Shadow tests are added to `.gitignore`. The pre-commit hook rejects any commit containing a `__shadow_*` prefix.
