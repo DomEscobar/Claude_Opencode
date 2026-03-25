@@ -1,8 +1,9 @@
-# Skill: Add API Client Method (Full-Stack Bridge)
+---
+name: add-api-client-method
+description: Bridge a backend Go endpoint to the Vue frontend by creating matching TypeScript types and a Pinia store method. Use when a new backend endpoint needs frontend integration, or a feature requires both backend and frontend changes.
+---
 
-## When to use
-A new backend endpoint exists and needs a corresponding frontend integration,
-or user asks for a feature that requires both backend and frontend changes.
+# Skill: Add API Client Method (Full-Stack Bridge)
 
 ## Before you start
 - Confirm the backend endpoint exists and its tests pass.

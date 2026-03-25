@@ -7,7 +7,7 @@ A monorepo template for Vue 3 + Go projects, structured for AI-assisted developm
 ```
 backend/          Go API server (Chi + GORM)
 frontend/         Vue 3 SPA (Vite + Pinia + Tailwind)
-agents/           Agent skills, responsibilities, and MCP server reference
+.agents/          Agent skills, responsibilities, and MCP server reference
 infrastructure/   Scripts and validation tools
 docs/             Architecture references
 .github/          CI/CD workflows
@@ -60,8 +60,7 @@ A `Makefile` provides a universal CLI interface. Run `make help` to see all targ
 
 ## Agent Integration
 
-This template includes `AGENTS.md` files that provide context and rules for AI coding agents.
-These work with tools like Claude Code, Codex, Cursor, and other agent-based development tools.
+This template includes `AGENTS.md` files and `.agents/` skills that provide context and rules for AI coding agents. These work with tools that support the Agent Skills standard (Claude Code, Cursor, Codex, Gemini CLI, GitHub Copilot, JetBrains, and others).
 
 ### Rules & Configuration
 
@@ -70,25 +69,41 @@ These work with tools like Claude Code, Codex, Cursor, and other agent-based dev
 | `AGENTS.md` | Project-wide rules, permissions, workflow, and git conventions |
 | `backend/AGENTS.md` | Go backend conventions, commands, and examples |
 | `frontend/AGENTS.md` | Vue frontend conventions, commands, and examples |
-| `agents/RESPONSIBILITIES.md` | Success criteria and verification process |
+| `.agents/RESPONSIBILITIES.md` | Success criteria and verification process |
 | `REGIONAL_MAP.md` | Directory-to-feature lookup |
 
-### Skills (Step-by-Step Recipes)
+### Skills (Auto-Discovered)
+
+Skills follow the `.agents/skills/{name}/SKILL.md` standard. Agents auto-discover them via YAML frontmatter descriptions.
+
+**Workflow skills** (based on [Anthropic's harness research](docs/anthropic-research.md)):
 
 | Skill | Purpose |
 | :--- | :--- |
-| `agents/skills/new-vue-component.md` | Add a Vue component |
-| `agents/skills/new-go-endpoint.md` | Add a Go API endpoint |
-| `agents/skills/add-api-client-method.md` | Bridge backend endpoint to frontend |
-| `agents/skills/database-migration.md` | Create safe database migrations |
-| `agents/skills/refactoring.md` | Large-scale refactors without breaking things |
-| `agents/skills/code-review.md` | Self-review checklist before submitting |
-| `agents/skills/bug-fix.md` | Fix a bug with test-first approach |
-| `agents/skills/incident-response.md` | Respond to production incidents |
+| `planning` | Expand a brief request into a scoped spec before coding |
+| `sprint-contract` | Define testable "done" criteria before implementing |
+| `code-review` | Skeptical evaluator review with weighted grading criteria |
+| `context-handoff` | Structured handoff artifact for multi-session work |
+
+**Implementation skills:**
+
+| Skill | Purpose |
+| :--- | :--- |
+| `new-vue-component` | Add a Vue component |
+| `new-go-endpoint` | Add a Go API endpoint |
+| `add-api-client-method` | Bridge backend endpoint to frontend |
+| `database-migration` | Create safe database migrations |
+| `refactoring` | Large-scale refactors without breaking things |
+| `bug-fix` | Fix a bug with test-first approach |
+| `incident-response` | Respond to production incidents |
 
 ### MCP Server Integration
 
-See `agents/MCP_SERVERS.md` for recommended MCP servers (Context7, Playwright, GitHub, Sentry, PostgreSQL) and their configuration.
+See `.agents/MCP_SERVERS.md` for recommended MCP servers (Context7, Playwright, GitHub, Sentry, PostgreSQL) and their configuration.
+
+### Research
+
+See `docs/anthropic-research.md` for the research behind the workflow patterns (planner-generator-evaluator architecture, sprint contracts, context handoffs).
 
 ## CI/CD
 

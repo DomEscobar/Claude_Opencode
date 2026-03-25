@@ -1,7 +1,9 @@
-# Skill: Database Migration
+---
+name: database-migration
+description: Create safe, reversible database schema migrations with up/down operations and backward compatibility. Use when the user asks to change the database schema, add tables, columns, indexes, or constraints.
+---
 
-## When to use
-User asks to change the database schema (add/modify tables, columns, indexes, constraints).
+# Skill: Database Migration
 
 ## Before you start
 - Read `backend/AGENTS.md` for conventions.

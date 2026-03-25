@@ -1,7 +1,9 @@
-# Skill: Refactoring
+---
+name: refactoring
+description: Safely restructure, rename, move, or reorganize code without changing behavior. Use when the user asks to refactor, reorganize, or clean up code across one or more files.
+---
 
-## When to use
-User asks to restructure, rename, move, or reorganize code without changing behavior.
+# Skill: Refactoring
 
 ## Core principle
 A refactor must not change behavior. Tests must pass identically before and after.

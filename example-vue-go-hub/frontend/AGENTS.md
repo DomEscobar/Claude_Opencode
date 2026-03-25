@@ -14,6 +14,7 @@ Vue 3 + Vite + Pinia + Tailwind CSS. Source code lives in `frontend/`.
 ## Conventions
 - Component names: PascalCase (e.g. `UserCard.vue`).
 - State management: Pinia stores in `src/stores/`.
+- Routing: Vue Router in `src/router/index.ts`.
 - Views/pages: `src/views/`.
 - Reusable components: `src/components/`.
 - Tests: `src/components/__tests__/` for component tests.
@@ -36,9 +37,11 @@ pnpm exec vitest run src/components/__tests__/UserCard.spec.ts  # Test one file
 
 ## Examples to Follow
 - Component with typed props: `src/components/UserCard.vue`
+- Component test: `src/components/__tests__/UserCard.spec.ts`
 - Pinia store with async actions: `src/stores/auth.ts`
+- Vue Router setup: `src/router/index.ts`
 - Page/view component: `src/views/dashboard/DashboardView.vue`
-- App entry with Pinia setup: `src/main.ts`
+- App entry with Pinia + Router: `src/main.ts`
 
 ## Anti-Patterns
 - Don't create `<style>` blocks -- use Tailwind utility classes

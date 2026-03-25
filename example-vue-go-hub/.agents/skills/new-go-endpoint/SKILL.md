@@ -1,7 +1,9 @@
-# Skill: New Go Endpoint
+---
+name: new-go-endpoint
+description: Add a new Go API endpoint with Chi router, including request/response types, handler, route registration, and tests. Use when the user asks to add a new API route or endpoint.
+---
 
-## When to use
-User asks to add a new API route or endpoint.
+# Skill: New Go Endpoint
 
 ## Before you start
 - Read `backend/AGENTS.md` for conventions.

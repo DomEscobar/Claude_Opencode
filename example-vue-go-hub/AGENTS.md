@@ -33,11 +33,21 @@ Never:
 
 ## Workflow Rules
 
-1. **Run tests before and after every change.** Record which tests fail before your patch. If a test that was already failing still fails after your patch, note it and move on. If your patch introduces a new failure, fix it before proceeding.
+1. **Check for a matching skill before starting.** Skills in `.agents/skills/` contain step-by-step recipes for common tasks. If one matches your task, read its `SKILL.md` and follow it.
 
-2. **Don't guess at missing context.** If you need to know what a type looks like or how a function behaves, read the file. Never fabricate interfaces, types, or behavior you haven't verified.
+2. **Plan before building.** For non-trivial features (3+ files, multi-layer, open-ended), use the `planning` skill to expand the requirement into a scoped spec and confirm with the user before writing code.
 
-3. **Verify before reporting success.** Every completed task must include evidence: a passing test run, a successful build, or a lint check. No "it should work" conclusions.
+3. **Define done before implementing.** For features with multiple acceptance criteria, use the `sprint-contract` skill to negotiate testable completion criteria before starting.
+
+4. **Run tests before and after every change.** Record which tests fail before your patch. If a test that was already failing still fails after your patch, note it and move on. If your patch introduces a new failure, fix it before proceeding.
+
+5. **Don't guess at missing context.** If you need to know what a type looks like or how a function behaves, read the file. Never fabricate interfaces, types, or behavior you haven't verified.
+
+6. **Review as an evaluator, not as the author.** When reviewing your own work, adopt a skeptical mindset. Test the running application when possible. Use the `code-review` skill with its weighted grading criteria.
+
+7. **Verify before reporting success.** Every completed task must include evidence: a passing test run, a successful build, or a lint check. No "it should work" conclusions.
+
+8. **Use structured handoffs for multi-session work.** When work spans sessions or context is getting large, use the `context-handoff` skill to write a handoff artifact instead of relying on conversation history.
 
 ## High-Scrutiny Files
 Run `git log --oneline -10` before editing any of these:
@@ -63,23 +73,33 @@ Run `git log --oneline -10` before editing any of these:
 ## Anti-Patterns (never do this)
 - Don't use `interface{}` / `any` in Go when the type is known
 - Don't create `<style>` blocks in Vue -- use Tailwind classes
-- Don't put business logic in handlers -- delegate to services/repositories
+- Don't put business logic in handlers -- delegate to repositories
 - Don't use `as any` in TypeScript
 - Don't add heavy dependencies without approval
 
 ## Skills
-Step-by-step recipes for common tasks live in `agents/skills/`:
-- `agents/skills/new-vue-component.md` -- Add a Vue component
-- `agents/skills/new-go-endpoint.md` -- Add a Go API endpoint
-- `agents/skills/add-api-client-method.md` -- Bridge a backend endpoint to the frontend
-- `agents/skills/database-migration.md` -- Create safe database migrations
-- `agents/skills/refactoring.md` -- Large-scale refactors without breaking things
-- `agents/skills/code-review.md` -- Self-review checklist before submitting
-- `agents/skills/bug-fix.md` -- Fix a bug with test-first approach
-- `agents/skills/incident-response.md` -- Respond to production incidents
+Auto-discovered from `.agents/skills/`. Each skill folder contains a `SKILL.md` with a description that agents match against your request. Available skills:
+
+**Workflow skills (harness patterns):**
+- **planning** -- Expand a brief request into a scoped spec before coding
+- **sprint-contract** -- Define testable "done" criteria before implementing
+- **code-review** -- Skeptical evaluator review with weighted grading criteria
+- **context-handoff** -- Structured handoff artifact for multi-session work
+
+**Implementation skills:**
+- **new-vue-component** -- Add a Vue component with typed props and test
+- **new-go-endpoint** -- Add a Go API endpoint with handler and test
+- **add-api-client-method** -- Bridge a backend endpoint to the frontend
+- **database-migration** -- Create safe, reversible database migrations
+- **refactoring** -- Large-scale refactors without breaking things
+- **bug-fix** -- Fix a bug with test-first approach
+- **incident-response** -- Respond to production incidents
 
 ## MCP Servers
-See `agents/MCP_SERVERS.md` for recommended MCP server integrations and setup.
+See `.agents/MCP_SERVERS.md` for recommended MCP server integrations and setup.
+
+## Research
+See `docs/anthropic-research.md` for the research behind the workflow patterns above.
 
 ## When In Doubt, Ask
 If a task is ambiguous, ask before coding. Example: "Add pagination" -- ask whether the user wants offset-based or cursor-based pagination before writing code.

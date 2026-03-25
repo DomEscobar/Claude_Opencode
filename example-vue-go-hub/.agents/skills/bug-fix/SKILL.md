@@ -1,8 +1,9 @@
-# Skill: Bug Fix
+---
+name: bug-fix
+description: Fix a bug using a test-first approach -- reproduce with a failing test, apply the smallest fix, verify all tests pass. Use when a user reports a bug, a test is failing, or unexpected behavior is found. For production incidents with Sentry alerts, use incident-response instead.
+---
 
-## When to use
-User reports a bug, a test is failing, or unexpected behavior is found during development.
-For production incidents with Sentry alerts, use `incident-response.md` instead.
+# Skill: Bug Fix
 
 ## Steps
 

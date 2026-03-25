@@ -14,15 +14,16 @@ Directory-to-feature lookup. Use this to navigate to the right code.
 | UI components | `frontend/src/components/` | `frontend/AGENTS.md` |
 | Component tests | `frontend/src/components/__tests__/` | `frontend/AGENTS.md` |
 | Page views | `frontend/src/views/` | `frontend/AGENTS.md` |
+| Routing | `frontend/src/router/` | `frontend/AGENTS.md` |
 | State management | `frontend/src/stores/` | `frontend/AGENTS.md` |
 
 ## Infrastructure & Tooling
 
 | Feature | Directory | Notes |
 | :--- | :--- | :--- |
-| Validation scripts | `infrastructure/scripts/` | Backend and frontend structure checkers |
+| Validation scripts | `infrastructure/scripts/` | Structure checkers and context routing spec |
 | CI/CD pipeline | `.github/workflows/` | GitHub Actions for test + lint + build |
-| Agent skills | `agents/skills/` | Step-by-step recipes for common tasks |
-| Agent responsibilities | `agents/RESPONSIBILITIES.md` | Success criteria and verification |
-| MCP server reference | `agents/MCP_SERVERS.md` | Recommended MCP server configs |
-| Architecture docs | `docs/` | Research report and design references |
+| Agent skills (auto-discovered) | `.agents/skills/` | `SKILL.md` per skill folder, YAML frontmatter |
+| Agent responsibilities | `.agents/RESPONSIBILITIES.md` | Success criteria and verification |
+| MCP server reference | `.agents/MCP_SERVERS.md` | Recommended MCP server configs |
+| Architecture docs & research | `docs/` | Research report, Anthropic harness research |

@@ -36,7 +36,7 @@ Test frontend changes visually. Interact with the running dev server, fill forms
 ### GitHub -- PR and issue management
 Create PRs, read issues, post review comments, check CI status directly from agent context.
 
-**When it helps:** The `code-review.md` and `incident-response.md` skills benefit from reading issue context.
+**When it helps:** The code-review and incident-response skills benefit from reading issue context.
 
 ```json
 {
@@ -51,7 +51,7 @@ Create PRs, read issues, post review comments, check CI status directly from age
 ```
 
 ### Sentry -- Error monitoring
-Fetch real error traces, stack traces, and issue details. Powers the `incident-response.md` skill.
+Fetch real error traces, stack traces, and issue details. Powers the incident-response skill.
 
 **When it helps:** Production debugging, incident response, understanding error patterns.
 
@@ -67,7 +67,7 @@ Fetch real error traces, stack traces, and issue details. Powers the `incident-r
 ### PostgreSQL -- Database introspection
 Read schema definitions, verify migrations, inspect table structures. Useful when writing queries or migrations.
 
-**When it helps:** The `database-migration.md` skill benefits from inspecting the live schema.
+**When it helps:** The database-migration skill benefits from inspecting the live schema.
 
 ```json
 {

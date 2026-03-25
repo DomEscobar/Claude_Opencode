@@ -1,7 +1,9 @@
-# Skill: Incident Response
+---
+name: incident-response
+description: Respond to production errors reported via Sentry alerts, user reports, or failing health checks. Gather evidence, reproduce with a test, apply a targeted fix, and verify. Use for production emergencies, not regular bugs.
+---
 
-## When to use
-A production error is reported (via Sentry alert, user report, or failing health check).
+# Skill: Incident Response
 
 ## Steps
 

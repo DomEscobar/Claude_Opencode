@@ -1,7 +1,9 @@
-# Skill: New Vue Component
+---
+name: new-vue-component
+description: Create a new Vue 3 component with typed props, optional Pinia store, and unit test. Use when the user asks to add a UI component, page, or widget.
+---
 
-## When to use
-User asks to create a new UI component, page, or widget.
+# Skill: New Vue Component
 
 ## Steps
 
