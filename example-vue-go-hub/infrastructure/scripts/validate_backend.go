@@ -3,29 +3,31 @@ package main
 import (
 	"fmt"
 	"os"
-	"strings"
 )
 
-/*
-SCRIPTS/FORCE_GO_PROTOCOL.GO
-This is the internal 'Immune System' for /example-vue-go-hub/backend/.
-It ensures no implementations are written without a Contract and a Red-Test.
-*/
-
 func main() {
-	fmt.Println("🛡️  [OODA] Validating Backend Partition...")
-	
-	// Check for localized orientation
-	if _, err := os.Stat("AGENTS.md"); os.IsNotExist(err) {
-		fmt.Println("❌ CRITICAL: AGENTS.md missing in current partition.")
+	fmt.Println("Validating backend structure...")
+
+	required := []string{
+		"AGENTS.md",
+		"go.mod",
+		"cmd/main.go",
+		"internal/types/response.go",
+		"internal/types/schemas.go",
+	}
+
+	failed := false
+	for _, path := range required {
+		if _, err := os.Stat(path); os.IsNotExist(err) {
+			fmt.Printf("MISSING: %s\n", path)
+			failed = true
+		}
+	}
+
+	if failed {
+		fmt.Println("Validation failed. See missing files above.")
 		os.Exit(1)
 	}
 
-	// Check for Contract Node
-	if _, err := os.Stat("schemas.go"); os.IsNotExist(err) {
-		fmt.Println("❌ CRITICAL: Contract Node (schemas.go) missing.")
-		os.Exit(1)
-	}
-
-	fmt.Println("✅ Partition Aligned. Proceed to RED STATE.")
+	fmt.Println("Backend structure is valid.")
 }

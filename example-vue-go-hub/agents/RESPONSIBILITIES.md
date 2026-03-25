@@ -1,23 +1,29 @@
-# Agentic KPIs & Responsibilities (v3.0 GA Force)
+# Agent Responsibilities
 
-## 1. Success Metrics (Standardized)
+## Success Criteria
 
-| Metric | Target | Verification |
+| Metric | Target | How to verify |
 | :--- | :--- | :--- |
-| **Differential Correctness** | 100% | New tests pass AND old tests remain stable via **Pre-Patch Baseline**. |
-| **Zero-Guessing Rate** | 100% | No usage of `as any` or speculative types for missing context. |
-| **Salvage Score** | >80% | Quarantined PRs must include an "Actionable Diff" for human completion. |
+| New code correctness | 100% | New tests pass, existing tests stay green |
+| No guessing | 100% | No `as any`, no fabricated types, no speculative behavior |
+| Blocked tasks are recoverable | >80% | Stuck PRs include clear notes on what remains |
 
-## 2. Differential Verification Gate
-You must execute the following cycle for non-trivial logic changes:
-1. **BASELINE:** Run `go test ./...` or `pnpm test`. Record failures.
-2. **PATCH:** Apply content-addressed Search/Replace blocks.
-3. **VERIFY:** Run tests again. 
-   - New Failure = **Category B (Logic Error)**. Fix it.
-   - Failure matches Baseline = **Category C (Pre-existing Flake)**. Document and Proceed.
+## Change Verification Process
 
-## 3. High-Signal Quarantine (Salvage Manifest)
-If a task reaches an impasse, do not simply delete or revert. **Quarantine** to a branch and write a `SALVAGE_MANIFEST.md`:
-- **The Blocker:** Specific error trace or missing spec.
-- **The Success:** Parts of the logic that passed shadow tests.
-- **The Handoff:** "Human task: add specific auth token logic to line 45."
+For any non-trivial logic change, follow this cycle:
+
+1. **Before patching:** Run `go test ./...` or `pnpm test:unit`. Record any pre-existing failures.
+2. **Apply the change.**
+3. **After patching:** Run tests again.
+   - New failure your patch introduced? Fix it.
+   - Failure that existed before your patch? Document it and continue.
+
+## When You're Stuck
+
+Don't silently revert or delete work. Instead:
+
+- Branch off and preserve what you have.
+- Write a clear note covering:
+  - What specifically is blocking you (error trace, missing spec).
+  - What parts of your work are correct and tested.
+  - What a human needs to do to finish the task.

@@ -1,16 +1,16 @@
-# agents/skills/incident-response.md
+# Skill: Incident Response
 
-## Trigger
-Automated Sentry alert or user reports a production crash/regression.
+## When to use
+A production error is reported (via Sentry alert, user report, or failing health check).
 
 ## Steps
-1. **Evidence Gathering:** Call `mcp_sentry_get_issue_details`.
-2. **Context Sync:** Read `REGIONAL_MAP.md` and `backend/AGENTS.md` for the impacted domain.
-3. **Reproduction:** Create a `tests/shadow/repro_test.go` that triggers the crash logic.
-4. **Surgical Patch:** Apply an AST-node patch (Search/Replace).
-5. **Reflection:** Run `go test` + `pnpm typecheck`.
-6. **Closing:** Update `Durable Memory` Pitfalls if the error was architectural.
 
-## Verification
-- Reparation confirmed by Shadow Test exit code 0.
-- PR title format: `fix(incident): [IncidentID] short description`
+1. **Gather evidence:** Read the error trace, logs, or Sentry issue details.
+2. **Locate the code:** Use `REGIONAL_MAP.md` to find the affected module.
+3. **Reproduce:** Write a test that triggers the failure (`_test.go` in the same package).
+4. **Fix:** Apply a targeted patch. Keep the change as small as possible.
+5. **Verify:** Run `go test ./...` and `pnpm typecheck` to confirm the fix and check for regressions.
+6. **Document:** If the root cause was an architectural issue, note it for future reference.
+
+## PR format
+`fix(incident): [ID] short description of what was fixed`
